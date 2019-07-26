@@ -1,0 +1,14 @@
+{
+    "title": "Vue2.0源码阅读",
+    "author": "luguanrui",
+    "description": "记录自己学习Vue2.0源码的过程",
+    "language": "zh-hans",
+    "gitbook": "3.2.3",
+    "structure": {
+        "readme": "README.md",
+        "summary": "SUMMARY.md"
+    },
+    "plugins": [
+    ],
+    "pluginsConfig": {}
+}
