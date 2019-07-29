@@ -1,6 +1,9 @@
+# new Vue()的时候发生了什么
+
 从源码分析，`new Vue()`实际上就是调用了原型上的`_init()`方法，那么`_init()`方法做了什么？
 
 执行如下代码，打印vue实例
+
 ```javascript
 let vue = new Vue({
   el: '#app',
@@ -11,9 +14,9 @@ let vue = new Vue({
 console.log(vue)
 ```
 
-
 结果如下：
-![](./images/new-vue.png)
+
+<img src="./images/new-vue.png" width="50%"/>
 
 ```javascript
 export function initMixin (Vue: Class<Component>) {
@@ -88,6 +91,7 @@ export function initMixin (Vue: Class<Component>) {
 
 可以看出，`_init()`函数主要做了如下几件事：
 配置合并
+
 ```javascript
 vm._self = vm
 initLifecycle(vm)// 初始化生命周期
@@ -100,8 +104,9 @@ initProvide(vm) // resolve provide after data/props，初始化provide
 callHook(vm, 'created')// created
 挂载实例， vm.$mount(vm.$options.el)
 ```
-     
+
 三、initLifecycle
+
 ```javascript
 export function initLifecycle (vm: Component) {
   // 将配置合并完成的结果赋值给options
@@ -131,8 +136,8 @@ export function initLifecycle (vm: Component) {
 }
 ```
 
-
 四、initEvents
+
 ```javascript
 export function initEvents (vm: Component) {
   vm._events = Object.create(null)
@@ -146,6 +151,7 @@ export function initEvents (vm: Component) {
 ```
 
 五、initRender
+
 ```javascript
 export function initRender (vm: Component) {
   vm._vnode = null // the root of the child tree
@@ -184,6 +190,7 @@ export function initRender (vm: Component) {
 ```
 
 六、initState
+
 ```javascript
 // 初始化state，包括props,methods,data,computed,watch等的初始化
 // 可以看出，为什么props是现在data之前执行的
@@ -210,6 +217,3 @@ function a(){
     b()
 }
 export function b(){}
-
-
-

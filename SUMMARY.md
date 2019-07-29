@@ -6,3 +6,4 @@
   * [引入Vue做了什么](docs/week01/引入Vue做了什么.md)
   * [实例化Vue](docs/week01/实例化Vue.md)
 * 第二周 阅读笔记
+  * [合并配置](docs/week02/合并配置.md)

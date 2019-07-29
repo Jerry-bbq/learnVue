@@ -1,22 +1,26 @@
+# 引入Vue的时候，vue内部做了什么
+
 ```javascript
 import Vue from 'vue'
 // 打印出引入的Vue
 console.dir(Vue)
 ```
+
 结果如下图：
-![](./images/import-vue.png)
+
+<img src="./images/import-vue.png" width="50%"/>
 
 点开prototype,结果如下图：
-![](./images/prototype.png)
 
+<img src="./images/prototype.png" width="50%"/>
 
 1. 先执行了下面的5个mixin函数
+
 - initMixin(Vue) // Vue.prototye上添加了`_init`方法
 - stateMixin(Vue) // Vue.prototye上定义了属性: `$data、$props，方法：$set、$delete、$watch`
 - eventsMixin(Vue)// Vue.prototye上添加了四个方法: `$on、 $once 、$off 、$emit`
 - lifecycleMixin(Vue)// lifecycleMixin(Vue)，在原型Vue.prototye上添加了三个方法：`_update 、$forceUpdate 、$destory`
 - renderMixin(Vue)// Vue.prototye上添加了方法：`$nextTick 、_render、 _o、 _n、 _s、 _l、 _t、 _q、 _i、 _m、 _f、 _k、 _b、 _v、 _e、 _u、 _g、 _d、 _p`
-
 
 2. 然后执行如下代码，在`src/core/index.js`中
 
@@ -55,8 +59,8 @@ Vue.version = '__VERSION__'
 export default Vue
 ```
 
-
 initGlobalAPI(Vue)：
+
 ```javascript
 /* @flow */
 
@@ -144,4 +148,4 @@ export function initGlobalAPI (Vue: GlobalAPI) {
 思考：
 为什么我们能够使用全局的api ?就是因为initGlobalAPI(Vue)这个函数，给Vue构造函数添加了这些全局的静态属性和方法
 
-![](./images/global-api.png)
+<img src="./images/global-api.png" width="20%"/>
