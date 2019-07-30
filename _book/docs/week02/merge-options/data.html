@@ -1,0 +1,555 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>data · Vue2.0源码阅读</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="luguanrui">
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-prism/prism-tomorrow.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="hooks.html" />
+    
+    
+    <link rel="prev" href="el-and-propsData.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                    介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    第一周 阅读笔记
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../week01/input.html">
+            
+                <a href="../../week01/input.html">
+            
+                    
+                    入口文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../../week01/import.html">
+            
+                <a href="../../week01/import.html">
+            
+                    
+                    引入Vue做了什么
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../../week01/new.html">
+            
+                <a href="../../week01/new.html">
+            
+                    
+                    实例化Vue
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    第二周 阅读笔记
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="merge-options.html">
+            
+                <a href="merge-options.html">
+            
+                    
+                    合并配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="merge-strats.html">
+            
+                <a href="merge-strats.html">
+            
+                    
+                    合并策略
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1" data-path="el-and-propsData.html">
+            
+                <a href="el-and-propsData.html">
+            
+                    
+                    el和propsData
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.2.2" data-path="data.html">
+            
+                <a href="data.html">
+            
+                    
+                    data
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3" data-path="hooks.html">
+            
+                <a href="hooks.html">
+            
+                    
+                    hooks
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.4" data-path="assets.html">
+            
+                <a href="assets.html">
+            
+                    
+                    assets
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.5" data-path="watchers.html">
+            
+                <a href="watchers.html">
+            
+                    
+                    watchers
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.6" data-path="props-methods-inject-computed.html">
+            
+                <a href="props-methods-inject-computed.html">
+            
+                    
+                    props，methods，inject，computed
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.7" data-path="provide.html">
+            
+                <a href="provide.html">
+            
+                    
+                    provide
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >data</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="data&#x7684;&#x5408;&#x5E76;&#x7B56;&#x7565;">data&#x7684;&#x5408;&#x5E76;&#x7B56;&#x7565;</h1>
+<p><code>strats</code>&#x5BF9;&#x8C61;&#x4E0A;&#x6DFB;&#x52A0;<code>data</code>&#x65B9;&#x6CD5;&#xFF0C;&#x63A5;&#x6536;&#x4E09;&#x4E2A;&#x53C2;&#x6570;<code>parentVal</code>&#x3001;<code>childVal</code>&#x3001;<code>vm</code>&#xFF08;&#x53EF;&#x4E0D;&#x4F20;&#xFF09;,&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;</p>
+<pre class="language-"><code class="lang-javascript">strats<span class="token punctuation">.</span><span class="token function-variable function">data</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>
+  <span class="token parameter">parentVal<span class="token punctuation">:</span> any<span class="token punctuation">,</span>
+  childVal<span class="token punctuation">:</span> any<span class="token punctuation">,</span>
+  vm<span class="token operator">?</span><span class="token punctuation">:</span> Component</span>
+<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token operator">?</span>Function <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>vm<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>childVal <span class="token operator">&amp;&amp;</span> <span class="token keyword">typeof</span> childVal <span class="token operator">!==</span> <span class="token string">&apos;function&apos;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">!==</span> <span class="token string">&apos;production&apos;</span> <span class="token operator">&amp;&amp;</span> <span class="token function">warn</span><span class="token punctuation">(</span>
+        <span class="token string">&apos;The &quot;data&quot; option should be a function &apos;</span> <span class="token operator">+</span>
+        <span class="token string">&apos;that returns a per-instance value in component &apos;</span> <span class="token operator">+</span>
+        <span class="token string">&apos;definitions.&apos;</span><span class="token punctuation">,</span>
+        vm
+      <span class="token punctuation">)</span>
+      <span class="token keyword">return</span> parentVal
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token function">mergeDataOrFn</span><span class="token punctuation">(</span>parentVal<span class="token punctuation">,</span> childVal<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> <span class="token function">mergeDataOrFn</span><span class="token punctuation">(</span>parentVal<span class="token punctuation">,</span> childVal<span class="token punctuation">,</span> vm<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x4EE3;&#x7801;&#x5206;&#x6790;&#xFF1A;</p>
+<ol>
+<li>&#x63A5;&#x6536;&#x4E09;&#x4E2A;&#x53C2;&#x6570;&#xFF1A;<code>parentVal</code>&#x3001;<code>childVal</code>&#x3001;<code>vm</code>&#xFF08;&#x53EF;&#x4E0D;&#x4F20;&#xFF09;</li>
+<li><p>&#x5982;&#x679C;&#x7B2C;&#x4E09;&#x4E2A;&#x53C2;&#x6570;<code>vm</code>&#x5B58;&#x5728;&#xFF0C;&#x8FD4;&#x56DE;<code>mergeDataOrFn(parentVal, childVal, vm)</code>&#xFF1B;</p>
+<p> &#x5426;&#x5219;&#xFF0C;&#x8FDB;&#x5165;&#x4E0B;&#x4E00;&#x4E2A;&#x5224;&#x65AD;&#xFF0C;&#x5982;&#x679C;<code>childVal</code>&#x5B58;&#x5728;&#x5E76;&#x4E14;<code>childVal</code>&#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x8FD4;&#x56DE; <code>parentVal</code>&#xFF1B;</p>
+<p> &#x5426;&#x5219;&#xFF0C;&#x8FD4;&#x56DE;<code>mergeDataOrFn(parentVal, childVal)</code></p>
+</li>
+</ol>
+<p>&#x63A5;&#x4E0B;&#x6765;&#xFF0C;&#x5206;&#x6790;<code>mergeDataOrFn</code>&#x65B9;&#x6CD5;</p>
+<pre class="language-"><code class="lang-javascript"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">mergeDataOrFn</span> <span class="token punctuation">(</span>
+  <span class="token parameter">parentVal<span class="token punctuation">:</span> any<span class="token punctuation">,</span>
+  childVal<span class="token punctuation">:</span> any<span class="token punctuation">,</span>
+  vm<span class="token operator">?</span><span class="token punctuation">:</span> Component</span>
+<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token operator">?</span>Function <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>vm<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// &#x5982;&#x679C;&#x6CA1;&#x6709;&#x4F20;&#x5165;vm</span>
+    <span class="token comment">// in a Vue.extend merge, both should be functions&#xFF0C;&#x5728; Vue.extend &#x7684;&#x5408;&#x5E76;&#x4E2D;&#xFF0C;&#x4E24;&#x4E2A;&#x90FD;&#x5E94;&#x8BE5;&#x662F;&#x51FD;&#x6570;</span>
+    <span class="token comment">// &#x5B50;&#x5BF9;&#x8C61;&#x4E0D;&#x5B58;&#x5728;&#x8FD4;&#x56DE;&#x7236;&#x5BF9;&#x8C61;&#xFF0C;&#x7236;&#x5BF9;&#x8C61;&#x4E0D;&#x5B58;&#x5728;&#x8FD4;&#x56DE;&#x5B50;&#x5BF9;&#x8C61;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>childVal<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> parentVal
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>parentVal<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> childVal
+    <span class="token punctuation">}</span>
+    <span class="token comment">// &#x5982;&#x679C;childVal&#xFF0C;parentVal&#x90FD;&#x5B58;&#x5728;&#xFF0C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x51FD;&#x6570; mergedDataFn</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token function">mergedDataFn</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// &#x8FD4;&#x56DE; &#x5408;&#x5E76;&#x51FD;&#x6570;</span>
+      <span class="token keyword">return</span> <span class="token function">mergeData</span><span class="token punctuation">(</span>
+        <span class="token keyword">typeof</span> childVal <span class="token operator">===</span> <span class="token string">&apos;function&apos;</span> <span class="token operator">?</span> <span class="token function">childVal</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> childVal<span class="token punctuation">,</span>
+        <span class="token keyword">typeof</span> parentVal <span class="token operator">===</span> <span class="token string">&apos;function&apos;</span> <span class="token operator">?</span> <span class="token function">parentVal</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> parentVal
+      <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token comment">// &#x5982;&#x679C;&#x4F20;&#x5165;vm&#xFF0C;&#x8FD4;&#x56DE;&#x51FD;&#x6570; mergedInstanceDataFn</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token function">mergedInstanceDataFn</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// &#x5B9E;&#x4F8B;&#x7684;&#x5408;&#x5E76;</span>
+      <span class="token comment">// &#x62FF;&#x5230; childVal &#x7684;&#x503C;&#xFF0C;&#x5982;&#x679C;&#x662F;&#x51FD;&#x6570;&#xFF0C;&#x6267;&#x884C;&#x5B83;&#x83B7;&#x53D6;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x662F;&#xFF0C;&#x76F4;&#x63A5;&#x8FD4;&#x56DE; childVal</span>
+      <span class="token keyword">const</span> instanceData <span class="token operator">=</span> <span class="token keyword">typeof</span> childVal <span class="token operator">===</span> <span class="token string">&apos;function&apos;</span>
+        <span class="token operator">?</span> <span class="token function">childVal</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>vm<span class="token punctuation">,</span> vm<span class="token punctuation">)</span>
+        <span class="token punctuation">:</span> childVal
+      <span class="token comment">// &#x540C;&#x7406;&#x62FF;&#x5230; parentVal &#x7684;&#x503C;</span>
+      <span class="token keyword">const</span> defaultData <span class="token operator">=</span> <span class="token keyword">typeof</span> parentVal <span class="token operator">===</span> <span class="token string">&apos;function&apos;</span>
+        <span class="token operator">?</span> <span class="token function">parentVal</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>vm<span class="token punctuation">,</span> vm<span class="token punctuation">)</span>
+        <span class="token punctuation">:</span> parentVal
+      <span class="token comment">// &#x5982;&#x679C; childVal &#x5B58;&#x5728;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;&#x5408;&#x5E76;&#x51FD;&#x6570;&#xFF0C;&#x5426;&#x5219;&#x76F4;&#x63A5;&#x8FD4;&#x56DE; parentVal</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>instanceData<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">mergeData</span><span class="token punctuation">(</span>instanceData<span class="token punctuation">,</span> defaultData<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> defaultData
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5206;&#x6790;&#xFF1A;</p>
+<ol>
+<li><p>&#x5982;&#x679C;&#x6CA1;&#x6709;&#x4F20;&#x5165;<code>vm</code>&#xFF0C;&#x5BF9;<code>parentVal</code>,<code>childVal</code>&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x5B58;&#x5728;&#x4E0E;&#x5426;&#x8FDB;&#x884C;&#x5224;&#x65AD;&#xFF1A;</p>
+<p> &#x5982;&#x679C;<code>childVal</code>&#x4E0D;&#x5B58;&#x5728;&#x8FD4;&#x56DE;<code>parentVal</code>&#xFF1B;</p>
+<p> &#x5982;&#x679C;<code>parentVal</code>&#x4E0D;&#x5B58;&#x5728;&#x8FD4;&#x56DE;<code>childVal</code>&#xFF1B;</p>
+<p> &#x5982;&#x679C;&#x4E24;&#x4E2A;&#x503C;&#x90FD;&#x5B58;&#x5728;&#x8FD4;&#x56DE;&#x5408;&#x5E76;&#x51FD;&#x6570; <code>mergeData</code></p>
+</li>
+<li><p>&#x5982;&#x679C;&#x4F20;&#x5165;<code>vm</code>&#xFF0C;&#x5BF9;<code>parentVal</code>,<code>childVal</code>&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x662F;&#x4E0D;&#x662F;&#x51FD;&#x6570;&#x7C7B;&#x578B;&#x8FDB;&#x884C;&#x5224;&#x65AD;&#xFF1A;  </p>
+<p> &#x5982;&#x679C;<code>childVal</code>&#x662F;&#x51FD;&#x6570;&#xFF0C;&#x76F4;&#x63A5;&#x6267;&#x884C;&#x8BE5;&#x51FD;&#x6570;&#x62FF;&#x5230;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x5426;&#x5219;&#xFF0C;&#x8FD4;&#x56DE;<code>childVal</code>&#x5E76;&#x5B58;&#x5230;&#x53D8;&#x91CF; <code>instanceData</code>&#xFF1B;</p>
+<p> <code>parentVal</code>&#x540C;&#x7406;&#xFF0C;&#x5B58;&#x5230;&#x53D8;&#x91CF; <code>defaultData</code>&#x4E2D;&#xFF1B;</p>
+<p> &#x5982;&#x679C; <code>instanceData</code> &#x5B58;&#x5728;&#xFF0C;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;&#x5408;&#x5E76;&#x51FD;&#x6570; <code>mergeData</code>&#x5E76;&#x4F20;&#x5165;&#x53C2;&#x6570;<code>instanceData</code> &#x548C;<code>defaultData</code>&#xFF1B;</p>
+<p> &#x5426;&#x5219;&#xFF0C;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;<code>defaultData</code></p>
+</li>
+</ol>
+<p>&#x5728;&#x4E0A;&#x9762;&#x591A;&#x6B21;&#x63D0;&#x5230;&#x51FD;&#x6570;<code>mergeData</code>&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x7684;&#x53C8;&#x662F;&#x505A;&#x4EC0;&#x4E48;&#x7684;&#x5462;&#xFF1A;</p>
+<pre class="language-"><code class="lang-javascript"><span class="token comment">// Helper that recursively merges two data objects together.</span>
+<span class="token keyword">function</span> <span class="token function">mergeData</span> <span class="token punctuation">(</span><span class="token parameter">to<span class="token punctuation">:</span> Object<span class="token punctuation">,</span> <span class="token keyword">from</span><span class="token punctuation">:</span> <span class="token operator">?</span>Object</span><span class="token punctuation">)</span><span class="token punctuation">:</span> Object <span class="token punctuation">{</span>
+  <span class="token comment">// &#x5982;&#x679C;&#x6E90;&#x5BF9;&#x8C61;&#x4E0D;&#x5B58;&#xFF0C;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;&#x76EE;&#x6807;&#x5BF9;&#x8C61;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">from</span><span class="token punctuation">)</span> <span class="token keyword">return</span> to
+  <span class="token comment">// &#x5B9A;&#x4E49;&#x4E09;&#x4E2A;&#x53D8;&#x91CF;</span>
+  <span class="token keyword">let</span> key<span class="token punctuation">,</span> toVal<span class="token punctuation">,</span> fromVal
+  <span class="token comment">// &#x83B7;&#x53D6;&#x6E90;&#x5BF9;&#x8C61;from&#x7684;&#x6240;&#x6709;key&#x7EC4;&#x6210;&#x7684;&#x6570;&#x7EC4;keys</span>
+  <span class="token keyword">const</span> keys <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span><span class="token keyword">from</span><span class="token punctuation">)</span>
+  <span class="token comment">// &#x904D;&#x5386;&#x6E90;&#x5BF9;&#x8C61;from&#x7684;&#x6240;&#x6709;key&#x7EC4;&#x6210;&#x7684;&#x6570;&#x7EC4;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> keys<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// &#x5C06;&#x6E90;&#x5BF9;&#x8C61;from&#x7684;key&#x8D4B;&#x503C;&#x7ED9;&#x53D8;&#x91CF; key</span>
+    key <span class="token operator">=</span> keys<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+    <span class="token comment">// &#x5C06;&#x6E90;&#x5BF9;&#x8C61;from&#x7684;key&#x4F5C;&#x4E3A;&#x76EE;&#x6807;&#x5BF9;&#x8C61;to&#x7684;key&#x83B7;&#x53D6;to&#x5BF9;&#x5E94;&#x7684;value&#xFF0C;&#x8D4B;&#x503C;&#x7ED9;&#x53D8;&#x91CF; toVal</span>
+    toVal <span class="token operator">=</span> to<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+    <span class="token comment">// &#x5C06;&#x6E90;&#x5BF9;&#x8C61;key&#x5BF9;&#x8C61;&#x7684;value&#x8D4B;&#x503C;&#x7ED9;&#x53D8;&#x91CF; fromVal</span>
+    fromVal <span class="token operator">=</span> <span class="token keyword">from</span><span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">hasOwn</span><span class="token punctuation">(</span>to<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// &#x5982;&#x679C;&#x76EE;&#x6807;&#x5BF9;&#x8C61;to&#x4E2D;&#xFF0C;&#x6CA1;&#x6709;&#x6E90;&#x5BF9;&#x8C61;from&#x7684;key&#x5C5E;&#x6027;&#xFF0C;</span>
+      <span class="token comment">// &#x5219;&#xFF0C;&#x5C06;&#x6E90;&#x5BF9;&#x8C61;from&#x4E0A;&#x7684;key&#x548C;&#x5BF9;&#x5E94;&#x7684;value&#xFF0C;&#x6DFB;&#x52A0;&#x5230;&#x76EE;&#x6807;&#x5BF9;&#x8C61;to&#x4E0A;</span>
+      <span class="token keyword">set</span><span class="token punctuation">(</span>to<span class="token punctuation">,</span> key<span class="token punctuation">,</span> fromVal<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>toVal <span class="token operator">!==</span> fromVal <span class="token operator">&amp;&amp;</span> <span class="token function">isPlainObject</span><span class="token punctuation">(</span>toVal<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">isPlainObject</span><span class="token punctuation">(</span>fromVal<span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// &#x5982;&#x679C;to[key]&#xFF0C;from[key]&#x4E0D;&#x76F8;&#x7B49;&#xFF0C;&#x5E76;&#x4E14;to[key]&#xFF0C;from[key]&#x90FD;&#x662F;&#x5BF9;&#x8C61;&#xFF0C;</span>
+      <span class="token comment">// &#x5219;&#xFF0C;&#x9012;&#x5F52;&#xFF0C;&#x5408;&#x5E76;to[key]&#xFF0C;from[key]&#x5BF9;&#x8C61;</span>
+      <span class="token function">mergeData</span><span class="token punctuation">(</span>toVal<span class="token punctuation">,</span> fromVal<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// &#x8FD4;&#x56DE;&#x5408;&#x5E76;&#x540E;&#x7684;&#x76EE;&#x6807;&#x5BF9;&#x8C61; to</span>
+  <span class="token keyword">return</span> to
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x7ECF;&#x8FC7;&#x5206;&#x6790;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;</p>
+<p>&#x4F5C;&#x7528;&#xFF1A;&#x5408;&#x5E76;&#x4E24;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x5C06;&#x6E90;&#x5BF9;&#x8C61;from&#x5408;&#x5E76;&#x5230;&#x76EE;&#x6807;&#x5BF9;&#x8C61;to,&#x5E76;&#x8FD4;&#x56DE;&#x76EE;&#x6807;&#x5BF9;&#x8C61;to</p>
+<p>&#x8FC7;&#x7A0B;&#xFF1A;&#x5BF9;&#x6BD4;&#x4E24;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x5C06;&#x4E24;&#x4E2A;&#x5BF9;&#x8C61;&#x4E0D;&#x540C;&#x7684;key&#x53CA;&#x5BF9;&#x5E94;&#x7684;value&#x5408;&#x5E76;&#x5230;&#x76EE;&#x6807;&#x5BF9;&#x8C61;to&#x4E0A;&#xFF0C;&#x6709;&#x76F8;&#x540C;&#x7684;key&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x4F7F;&#x7528;&#x76EE;&#x6807;&#x5BF9;&#x8C61;to&#x7684;key&#x53CA;&#x5BF9;&#x5E94;&#x7684;value</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="el-and-propsData.html" class="navigation navigation-prev " aria-label="Previous page: el和propsData">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="hooks.html" class="navigation navigation-next " aria-label="Next page: hooks">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"data","level":"1.3.2.2","depth":3,"next":{"title":"hooks","level":"1.3.2.3","depth":3,"path":"docs/week02/merge-options/hooks.md","ref":"docs/week02/merge-options/hooks.md","articles":[]},"previous":{"title":"el和propsData","level":"1.3.2.1","depth":3,"path":"docs/week02/merge-options/el-and-propsData.md","ref":"docs/week02/merge-options/el-and-propsData.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"luguanrui","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Vue2.0源码阅读","language":"zh-hans","gitbook":"3.2.3","description":"记录自己学习Vue2.0源码的过程"},"file":{"path":"docs/week02/merge-options/data.md","mtime":"2019-07-30T08:55:07.927Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-30T11:33:08.742Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

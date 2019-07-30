@@ -1,0 +1,457 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>el和propsData · Vue2.0源码阅读</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="luguanrui">
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-prism/prism-tomorrow.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="data.html" />
+    
+    
+    <link rel="prev" href="merge-strats.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                    介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    第一周 阅读笔记
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../week01/input.html">
+            
+                <a href="../../week01/input.html">
+            
+                    
+                    入口文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../../week01/import.html">
+            
+                <a href="../../week01/import.html">
+            
+                    
+                    引入Vue做了什么
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../../week01/new.html">
+            
+                <a href="../../week01/new.html">
+            
+                    
+                    实例化Vue
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    第二周 阅读笔记
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="merge-options.html">
+            
+                <a href="merge-options.html">
+            
+                    
+                    合并配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="merge-strats.html">
+            
+                <a href="merge-strats.html">
+            
+                    
+                    合并策略
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.3.2.1" data-path="el-and-propsData.html">
+            
+                <a href="el-and-propsData.html">
+            
+                    
+                    el和propsData
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2" data-path="data.html">
+            
+                <a href="data.html">
+            
+                    
+                    data
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3" data-path="hooks.html">
+            
+                <a href="hooks.html">
+            
+                    
+                    hooks
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.4" data-path="assets.html">
+            
+                <a href="assets.html">
+            
+                    
+                    assets
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.5" data-path="watchers.html">
+            
+                <a href="watchers.html">
+            
+                    
+                    watchers
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.6" data-path="props-methods-inject-computed.html">
+            
+                <a href="props-methods-inject-computed.html">
+            
+                    
+                    props，methods，inject，computed
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.7" data-path="provide.html">
+            
+                <a href="provide.html">
+            
+                    
+                    provide
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >el和propsData</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="el&#x548C;propsdata&#x7684;&#x5408;&#x5E76;&#x7B56;&#x7565;">el&#x548C;propsData&#x7684;&#x5408;&#x5E76;&#x7B56;&#x7565;</h1>
+<p><code>strats</code>&#x5BF9;&#x8C61;&#x4E0A;&#x6DFB;&#x52A0;&#x4E24;&#x4E2A;&#x76F8;&#x540C;&#x7684;&#x65B9;&#x6CD5;<code>el</code>&#x548C;<code>propsData</code>,&#x63A5;&#x6536;&#x4E24;&#x4E2A;&#x53C2;&#x6570;<code>parent</code>&#x548C;<code>child</code>&#xFF0C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5176;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x6709;<code>childVal</code>&#x8FD4;&#x56DE;<code>childVal</code>,&#x5426;&#x5219;&#x5C31;&#x8FD4;&#x56DE;<code>parentVal</code></p>
+<pre class="language-"><code class="lang-javascript"><span class="token comment">/**
+ * Options with restrictions
+ */</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">!==</span> <span class="token string">&apos;production&apos;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  strats<span class="token punctuation">.</span>el <span class="token operator">=</span> strats<span class="token punctuation">.</span><span class="token function-variable function">propsData</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">parent<span class="token punctuation">,</span> child<span class="token punctuation">,</span> vm<span class="token punctuation">,</span> key</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>vm<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">warn</span><span class="token punctuation">(</span>
+        <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">option &quot;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>key<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&quot; can only be used during instance </span><span class="token template-punctuation string">`</span></span> <span class="token operator">+</span>
+        <span class="token string">&apos;creation with the `new` keyword.&apos;</span>
+      <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// &#x8FD4;&#x56DE;&#x9ED8;&#x8BA4;&#x5408;&#x5E76;&#x7B56;&#x7565;&#x51FD;&#x6570;</span>
+    <span class="token keyword">return</span> <span class="token function">defaultStrat</span><span class="token punctuation">(</span>parent<span class="token punctuation">,</span> child<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x901A;&#x8FC7;&#x4E0A;&#x9762;&#x7684;&#x6E90;&#x7801;&#x4EE3;&#x7801;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;&#x5408;&#x5E76;&#x7B56;&#x7565;&#x5BF9;&#x8C61;<code>strats</code>&#x6DFB;&#x52A0;&#x4E24;&#x4E2A;&#x76F8;&#x540C;&#x7684;&#x65B9;&#x6CD5;<code>el</code>&#x548C;<code>propsData</code>&#xFF0C;&#x5206;&#x522B;&#x90FD;&#x63A5;&#x6536;&#x4E24;&#x4E2A;&#x53C2;&#x6570;<code>parent</code>&#x548C;<code>child</code>&#xFF0C;&#x5E76;&#x4E14;&#x8FD4;&#x56DE;&#x540C;&#x4E00;&#x4E2A;&#x9ED8;&#x8BA4;&#x5408;&#x5E76;&#x7B56;&#x7565;&#x51FD;&#x6570;<code>defaultStrat</code></p>
+<pre class="language-"><code class="lang-javascript"><span class="token comment">// Default strategy.</span>
+<span class="token keyword">const</span> <span class="token function-variable function">defaultStrat</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">parentVal<span class="token punctuation">:</span> any<span class="token punctuation">,</span> childVal<span class="token punctuation">:</span> any</span><span class="token punctuation">)</span><span class="token punctuation">:</span> any <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> childVal <span class="token operator">===</span> <span class="token keyword">undefined</span>
+    <span class="token operator">?</span> parentVal
+    <span class="token punctuation">:</span> childVal
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x4ECE;&#x4E0A;&#x9762;&#x4EE3;&#x7801;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;&#x9ED8;&#x8BA4;&#x5408;&#x5E76;&#x7B56;&#x7565;<code>defaultStrat</code>&#x63A5;&#x6536;<code>parentVal</code>&#x548C;<code>childVal</code>&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;,&#x8FD4;&#x56DE;&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#x4E2D;&#x7684;&#x67D0;&#x4E00;&#x4E2A;&#x53C2;&#x6570;</p>
+<p>&#x89C4;&#x5219;&#x662F;&#xFF1A;&#x6709;<code>childVal</code>&#x8FD4;&#x56DE;<code>childVal</code>,&#x5426;&#x5219;&#x5C31;&#x8FD4;&#x56DE;<code>parentVal</code></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="merge-strats.html" class="navigation navigation-prev " aria-label="Previous page: 合并策略">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="data.html" class="navigation navigation-next " aria-label="Next page: data">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"el和propsData","level":"1.3.2.1","depth":3,"next":{"title":"data","level":"1.3.2.2","depth":3,"path":"docs/week02/merge-options/data.md","ref":"docs/week02/merge-options/data.md","articles":[]},"previous":{"title":"合并策略","level":"1.3.2","depth":2,"path":"docs/week02/merge-options/merge-strats.md","ref":"docs/week02/merge-options/merge-strats.md","articles":[{"title":"el和propsData","level":"1.3.2.1","depth":3,"path":"docs/week02/merge-options/el-and-propsData.md","ref":"docs/week02/merge-options/el-and-propsData.md","articles":[]},{"title":"data","level":"1.3.2.2","depth":3,"path":"docs/week02/merge-options/data.md","ref":"docs/week02/merge-options/data.md","articles":[]},{"title":"hooks","level":"1.3.2.3","depth":3,"path":"docs/week02/merge-options/hooks.md","ref":"docs/week02/merge-options/hooks.md","articles":[]},{"title":"assets","level":"1.3.2.4","depth":3,"path":"docs/week02/merge-options/assets.md","ref":"docs/week02/merge-options/assets.md","articles":[]},{"title":"watchers","level":"1.3.2.5","depth":3,"path":"docs/week02/merge-options/watchers.md","ref":"docs/week02/merge-options/watchers.md","articles":[]},{"title":"props，methods，inject，computed","level":"1.3.2.6","depth":3,"path":"docs/week02/merge-options/props-methods-inject-computed.md","ref":"docs/week02/merge-options/props-methods-inject-computed.md","articles":[]},{"title":"provide","level":"1.3.2.7","depth":3,"path":"docs/week02/merge-options/provide.md","ref":"docs/week02/merge-options/provide.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"luguanrui","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Vue2.0源码阅读","language":"zh-hans","gitbook":"3.2.3","description":"记录自己学习Vue2.0源码的过程"},"file":{"path":"docs/week02/merge-options/el-and-propsData.md","mtime":"2019-07-30T08:03:38.866Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-30T11:33:08.742Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
