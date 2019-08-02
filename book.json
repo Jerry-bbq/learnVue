@@ -8,7 +8,7 @@
     "readme": "README.md",
     "summary": "SUMMARY.md"
   },
-  "plugins": ["prism", "-highlight","back-to-top-button","expandable-chapters","github"],
+  "plugins": ["prism", "-highlight","back-to-top-button","github"],
   "pluginsConfig": {
     "prism": {
       "css": ["prismjs/themes/prism-tomorrow.css"]
