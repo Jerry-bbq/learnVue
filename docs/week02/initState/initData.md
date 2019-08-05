@@ -113,7 +113,7 @@ export function proxy (target: Object, sourceKey: string, key: string) {
 }
 ```
 
-简单实例验证:
+example:
 
 ``` javascript
 <template>

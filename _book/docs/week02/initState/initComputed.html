@@ -461,7 +461,131 @@
     
                                 <section class="normal markdown-section">
                                 
-                                
+                                <h1 id="initcomputed">initComputed</h1>
+<pre class="language-"><code class="lang-javascript"><span class="token comment">/**
+ * &#x521D;&#x59CB;&#x5316;&#x8BA1;&#x7B97;&#x5C5E;&#x6027;
+ * @param {*} vm
+ * @param {*} computed
+ */</span>
+<span class="token keyword">function</span> <span class="token function">initComputed</span> <span class="token punctuation">(</span><span class="token parameter">vm<span class="token punctuation">:</span> Component<span class="token punctuation">,</span> computed<span class="token punctuation">:</span> Object</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// $flow-disable-line</span>
+  <span class="token comment">// &#x521B;&#x5EFA;&#x4E24;&#x4E2A;&#x4E00;&#x6837;&#x7684;&#x7A7A;&#x5BF9;&#x8C61; watchers&#xFF0C;vm._computedWatchers</span>
+  <span class="token keyword">const</span> watchers <span class="token operator">=</span> vm<span class="token punctuation">.</span>_computedWatchers <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span>
+  <span class="token comment">// computed properties are just getters during SSR</span>
+  <span class="token keyword">const</span> isSSR <span class="token operator">=</span> <span class="token function">isServerRendering</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+  <span class="token comment">// &#x904D;&#x5386;&#x8BA1;&#x7B97;&#x5C5E;&#x6027; computed &#x5BF9;&#x8C61;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> key <span class="token keyword">in</span> computed<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// &#x83B7;&#x53D6;&#x8BA1;&#x7B97;&#x5C5E;&#x6027;key&#x5BF9;&#x5E94;&#x7684;value&#xFF1A;userDef</span>
+    <span class="token keyword">const</span> userDef <span class="token operator">=</span> computed<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+    <span class="token comment">// &#x5982;&#x679C;&#x5BF9;&#x5E94;&#x7684;&#x8BA1;&#x7B97;&#x5C5E;&#x6027;&#x662F;&#x51FD;&#x6570;&#xFF0C;&#x8D4B;&#x503C;&#x7ED9;getter&#x5E38;&#x91CF;&#xFF0C;&#x6216;&#x5219;&#x5C06;userDef.get&#x8D4B;&#x503C;&#x7ED9;getter</span>
+    <span class="token keyword">const</span> getter <span class="token operator">=</span> <span class="token keyword">typeof</span> userDef <span class="token operator">===</span> <span class="token string">&apos;function&apos;</span> <span class="token operator">?</span> userDef <span class="token punctuation">:</span> userDef<span class="token punctuation">.</span>get
+    <span class="token comment">// &#x975E;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#xFF0C;&#x5982;&#x679C;getter&#x4E0D;&#x5B58;&#x5728;&#xFF0C;&#x62A5;&#x8B66;&#x544A;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">!==</span> <span class="token string">&apos;production&apos;</span> <span class="token operator">&amp;&amp;</span> getter <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">warn</span><span class="token punctuation">(</span>
+        <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Getter is missing for computed property &quot;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>key<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&quot;.</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+        vm
+      <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>isSSR<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// create internal watcher for the computed property.</span>
+      <span class="token comment">// &#x4E3A;&#x6BCF;&#x4E00;&#x4E2A; getter &#x521B;&#x5EFA; watcher ---- computed watcher &#x548C; watcher&#x4E0D;&#x540C;</span>
+      watchers<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Watcher</span><span class="token punctuation">(</span>
+        vm<span class="token punctuation">,</span>
+        getter <span class="token operator">||</span> noop<span class="token punctuation">,</span>
+        noop<span class="token punctuation">,</span>
+        computedWatcherOptions
+      <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// component-defined computed properties are already defined on the</span>
+    <span class="token comment">// component prototype. We only need to define computed properties defined</span>
+    <span class="token comment">// at instantiation here.</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>key <span class="token keyword">in</span> vm<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token comment">// &#x5982;&#x679C;&#x8BA1;&#x7B97;&#x5C5E;&#x6027;&#x4E0D;&#x5728;vm&#x5B9E;&#x4F8B;&#x4E0A;</span>
+      <span class="token comment">// &#x5B9A;&#x4E49;&#x8BA1;&#x7B97;&#x5C5E;&#x6027;&#xFF0C;&#x4F20;&#x5165;vm&#x5B9E;&#x4F8B;&#xFF0C;&#x8BA1;&#x7B97;&#x5C5E;&#x6027;&#x7684;key&#xFF0C;&#x8BA1;&#x7B97;&#x5C5E;&#x6027;&#x7684;value</span>
+      <span class="token function">defineComputed</span><span class="token punctuation">(</span>vm<span class="token punctuation">,</span> key<span class="token punctuation">,</span> userDef<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">!==</span> <span class="token string">&apos;production&apos;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// &#x975E;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#xFF0C;&#x6821;&#x9A8C;&#x8BA1;&#x7B97;&#x5C5E;&#x6027;&#x662F;&#x5426;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;data&#x6216;&#x8005;props&#x4E2D;&#xFF0C;&#x5E76;&#x7ED9;&#x51FA;&#x76F8;&#x5E94;&#x7684;&#x63D0;&#x793A;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>key <span class="token keyword">in</span> vm<span class="token punctuation">.</span>$data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">warn</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">The computed property &quot;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>key<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&quot; is already defined in data.</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span> vm<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>vm<span class="token punctuation">.</span>$options<span class="token punctuation">.</span>props <span class="token operator">&amp;&amp;</span> key <span class="token keyword">in</span> vm<span class="token punctuation">.</span>$s<span class="token punctuation">.</span>props<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">warn</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">The computed property &quot;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>key<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&quot; is already defined as a prop.</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span> vm<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>defineComputed</p>
+<pre class="language-"><code class="lang-javascript"><span class="token comment">/**
+ * &#x5B9A;&#x4E49;&#x8BA1;&#x7B97;&#x5C5E;&#x6027;
+ * @param {*} target   vm&#x5BF9;&#x8C61;
+ * @param {*} key      &#x8BA1;&#x7B97;&#x5C5E;&#x6027;&#x7684;key
+ * @param {*} userDef  key&#x5BF9;&#x5E94;&#x7684;value
+ * &#x4F5C;&#x7528;&#xFF1A;&#x5229;&#x7528; Object.defineProperty &#x7ED9;&#x8BA1;&#x7B97;&#x5C5E;&#x6027;&#x5BF9;&#x5E94;&#x7684; key &#x503C;&#x6DFB;&#x52A0; getter &#x548C; setter
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">defineComputed</span> <span class="token punctuation">(</span>
+  <span class="token parameter">target<span class="token punctuation">:</span> any<span class="token punctuation">,</span>
+  key<span class="token punctuation">:</span> string<span class="token punctuation">,</span>
+  userDef<span class="token punctuation">:</span> Object <span class="token operator">|</span> Function</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// &#x662F;&#x5426;&#x662F;&#x670D;&#x52A1;&#x5668;&#x6E32;&#x67D3;&#xFF0C;true: &#x975E;&#x670D;&#x52A1;&#x5668;&#x6E32;&#x67D3;&#xFF0C;false&#xFF1A;&#x670D;&#x52A1;&#x5668;&#x6E32;&#x67D3;</span>
+  <span class="token keyword">const</span> shouldCache <span class="token operator">=</span> <span class="token operator">!</span><span class="token function">isServerRendering</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token comment">// &#x5982;&#x679C; &#x8BA1;&#x7B97;&#x5C5E;&#x6027; &#x662F;&#x51FD;&#x6570;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> userDef <span class="token operator">===</span> <span class="token string">&apos;function&apos;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// &#x7ED9;&#x5C5E;&#x6027;&#x63CF;&#x8FF0;&#x7B26;&#x6DFB;&#x52A0;getter</span>
+    sharedPropertyDefinition<span class="token punctuation">.</span>get <span class="token operator">=</span> shouldCache
+      <span class="token operator">?</span> <span class="token function">createComputedGetter</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token comment">// &#x8FD4;&#x56DE;&#x503C;&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570; computedGetter&#xFF0C;&#x5373;&#x8BA1;&#x7B97;&#x5C5E;&#x6027;&#x5BF9;&#x5E94;&#x7684;getter&#x51FD;&#x6570;</span>
+      <span class="token punctuation">:</span> <span class="token function">createGetterInvoker</span><span class="token punctuation">(</span>userDef<span class="token punctuation">)</span>
+    sharedPropertyDefinition<span class="token punctuation">.</span>set <span class="token operator">=</span> noop
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span> <span class="token comment">// &#x5982;&#x679C; &#x8BA1;&#x7B97;&#x5C5E;&#x6027; &#x4E0D;&#x662F;&#x51FD;&#x6570;</span>
+    sharedPropertyDefinition<span class="token punctuation">.</span>get <span class="token operator">=</span> userDef<span class="token punctuation">.</span>get
+      <span class="token operator">?</span> shouldCache <span class="token operator">&amp;&amp;</span> userDef<span class="token punctuation">.</span>cache <span class="token operator">!==</span> <span class="token boolean">false</span>
+        <span class="token operator">?</span> <span class="token function">createComputedGetter</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+        <span class="token punctuation">:</span> <span class="token function">createGetterInvoker</span><span class="token punctuation">(</span>userDef<span class="token punctuation">.</span>get<span class="token punctuation">)</span>
+      <span class="token punctuation">:</span> noop
+    sharedPropertyDefinition<span class="token punctuation">.</span>set <span class="token operator">=</span> userDef<span class="token punctuation">.</span>set <span class="token operator">||</span> noop
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">!==</span> <span class="token string">&apos;production&apos;</span> <span class="token operator">&amp;&amp;</span>
+      sharedPropertyDefinition<span class="token punctuation">.</span>set <span class="token operator">===</span> noop<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token comment">// &#x975E;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x4E0B;&#xFF0C;&#x5E76;&#x4E14;&#xFF0C;setter&#x662F;&#x7A7A;&#x51FD;&#x6570;</span>
+    <span class="token comment">// &#x6DFB;&#x52A0;setter&#x51FD;&#x6570;&#xFF0C;&#x5E76;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x63D0;&#x793A;</span>
+    sharedPropertyDefinition<span class="token punctuation">.</span><span class="token function-variable function">set</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">warn</span><span class="token punctuation">(</span>
+        <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Computed property &quot;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>key<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&quot; was assigned to but it has no setter.</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+        <span class="token keyword">this</span>
+      <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// &#x5229;&#x7528; Object.defineProperty &#x7ED9;&#x8BA1;&#x7B97;&#x5C5E;&#x6027;&#x5BF9;&#x5E94;&#x7684; key &#x503C;&#x6DFB;&#x52A0; getter &#x548C; setter</span>
+  Object<span class="token punctuation">.</span><span class="token function">defineProperty</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span> key<span class="token punctuation">,</span> sharedPropertyDefinition<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>createComputedGetter</p>
+<pre class="language-"><code class="lang-javascript"><span class="token comment">/**
+ * &#x7ED9;&#x8BA1;&#x7B97;&#x5C5E;&#x6027;&#x6BCF;&#x4E2A;key&#x6DFB;&#x52A0;getter
+ * @param {*} key
+ */</span>
+<span class="token keyword">function</span> <span class="token function">createComputedGetter</span> <span class="token punctuation">(</span><span class="token parameter">key</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// &#x8FD4;&#x56DE;&#x8BA1;&#x7B97;&#x5C5E;&#x6027;&#x5BF9;&#x5E94;&#x7684;getter&#x51FD;&#x6570; computedGetter</span>
+  <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token function">computedGetter</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// &#x5982;&#x679C;this._computedWatchers&#x5BF9;&#x8C61;&#x5B58;&#x5728;&#xFF0C;&#x5219;&#x83B7;&#x53D6;&#x5BF9;&#x8C61;&#x4E2D;&#x5BF9;&#x5E94;key&#x7684;value&#xFF0C;&#x5373;Wathcer</span>
+    <span class="token keyword">const</span> watcher <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_computedWatchers <span class="token operator">&amp;&amp;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_computedWatchers<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>watcher<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// dirty&#x9ED8;&#x8BA4;&#x662F;true</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>watcher<span class="token punctuation">.</span>dirty<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// &#x4F9D;&#x8D56;&#x6536;&#x96C6;&#x76F8;&#x5173;&#x7684;&#x65B9;&#x6CD5;,&#x83B7;&#x53D6;&#x65B0;&#x7684;&#x5C5E;&#x6027;&#x503C;</span>
+        watcher<span class="token punctuation">.</span><span class="token function">evaluate</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>Dep<span class="token punctuation">.</span>target<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// &#x6DFB;&#x52A0;&#x4F9D;&#x8D56;</span>
+        watcher<span class="token punctuation">.</span><span class="token function">depend</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+      <span class="token comment">// &#x8FD4;&#x56DE;value</span>
+      <span class="token keyword">return</span> watcher<span class="token punctuation">.</span>value
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+
                                 
                                 </section>
                             
@@ -504,7 +628,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"initComputed","level":"1.3.5.4","depth":3,"next":{"title":"initWatch","level":"1.3.5.5","depth":3,"path":"docs/week02/initState/initWatch.md","ref":"./docs/week02/initState/initWatch.md","articles":[]},"previous":{"title":"initData","level":"1.3.5.3","depth":3,"path":"docs/week02/initState/initData.md","ref":"./docs/week02/initState/initData.md","articles":[]},"dir":"neutral"},"config":{"plugins":["prism","-highlight","back-to-top-button","github","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"github":{"url":"https://github.com/luguanrui"},"livereload":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"luguanrui","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Vue2.0源码阅读","language":"zh-hans","gitbook":"3.2.3","description":"记录自己学习Vue2.0源码的过程"},"file":{"path":"docs/week02/initState/initComputed.md","mtime":"2019-08-02T03:14:34.971Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-05T07:46:31.648Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"initComputed","level":"1.3.5.4","depth":3,"next":{"title":"initWatch","level":"1.3.5.5","depth":3,"path":"docs/week02/initState/initWatch.md","ref":"./docs/week02/initState/initWatch.md","articles":[]},"previous":{"title":"initData","level":"1.3.5.3","depth":3,"path":"docs/week02/initState/initData.md","ref":"./docs/week02/initState/initData.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","back-to-top-button","github","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"github":{"url":"https://github.com/luguanrui"},"livereload":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"luguanrui","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Vue2.0源码阅读","language":"zh-hans","gitbook":"3.2.3","description":"记录自己学习Vue2.0源码的过程"},"file":{"path":"docs/week02/initState/initComputed.md","mtime":"2019-08-05T13:23:07.194Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-05T11:11:25.540Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

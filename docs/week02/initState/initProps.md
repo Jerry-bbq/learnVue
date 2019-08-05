@@ -81,7 +81,7 @@ function initProps (vm: Component, propsOptions: Object) {
 }
 ```
 
-例子：
+example:
 
 App.vue
 
