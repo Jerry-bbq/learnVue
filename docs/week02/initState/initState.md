@@ -16,7 +16,7 @@ export function initState (vm: Component) {
   vm._watchers = []
   // 获取当前实例的配置项
   const opts = vm.$options
-  // 当前实例的配置项存在props，则初始化props
+  // 当前实例的配置项存在props(如果有自定义的props)，则初始化props,比如：props:{type: String,default: ''}
   if (opts.props) initProps(vm, opts.props)
   // 当前实例的配置项存在methods，则初始化methods
   if (opts.methods) initMethods(vm, opts.methods)
