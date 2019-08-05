@@ -461,7 +461,84 @@
     
                                 <section class="normal markdown-section">
                                 
-                                
+                                <h1 id="initmethods">initMethods</h1>
+<p>&#x5206;&#x6790;&#xFF1A;</p>
+<ul>
+<li>&#x83B7;&#x53D6;<code>props</code>&#xFF0C;&#x7528;&#x6765;&#x5224;&#x65AD;&#x5728;methods&#x4E2D;&#x5B9A;&#x4E49;&#x7684;&#x65B9;&#x6CD5;&#x540D;&#x662F;&#x5426;props&#x5B9A;&#x4E49;&#x7684;&#x65B9;&#x6CD5;&#x540D;&#x91CD;&#x540D;</li>
+<li>&#x904D;&#x5386;<code>methods</code>&#x5BF9;&#x8C61;<ul>
+<li>&#x5224;&#x65AD;<code>methods</code>&#x5BF9;&#x8C61;&#x4E2D;&#x7684;&#x5C5E;&#x6027;&#x662F;&#x5426;&#x662F;&#x51FD;&#x6570;</li>
+<li>&#x5224;&#x65AD;<code>methods</code>&#x4E2D;&#x7684;key&#x662F;&#x5426;&#x5B58;&#x5728;&#x4E8E;<code>props</code></li>
+<li>&#x5224;&#x65AD;<code>methods</code>&#x4E2D;&#x5B9A;&#x4E49;&#x6CD5;&#x65B9;&#x6CD5;&#x662F;&#x5426;&#x5B58;&#x5728;&#x4E8E;vm&#x5B9E;&#x4F8B;&#xFF0C;&#x5E76;&#x4E14;&#x65B9;&#x6CD5;&#x662F;&#x5426;&#x662F;&#x4EE5;$&#x6216;&#x8005;&#x662F;_&#x547D;&#x540D;&#xFF0C;&#x7ED9;&#x51FA;&#x8B66;&#x544A;</li>
+<li>&#x5982;&#x679C;<code>methods</code>&#x5BF9;&#x8C61;&#x4E2D;&#x5B9A;&#x4E49;&#x7684;&#x5C5E;&#x6027;&#x662F;&#x51FD;&#x6570;&#xFF0C;&#x5C06;&#x6BCF;&#x4E2A;<code>key</code>&#x5BF9;&#x5E94;&#x7684;<code>value</code>&#x8D4B;&#x503C;&#x7ED9;<code>vm</code></li>
+</ul>
+</li>
+</ul>
+<pre class="language-"><code class="lang-javascript"><span class="token comment">// &#x521D;&#x59CB;&#x5316;methods&#x65B9;&#x6CD5;</span>
+<span class="token keyword">function</span> <span class="token function">initMethods</span> <span class="token punctuation">(</span><span class="token parameter">vm<span class="token punctuation">:</span> Component<span class="token punctuation">,</span> methods<span class="token punctuation">:</span> Object</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// &#x83B7;&#x53D6;props&#xFF0C;&#x7528;&#x6765;&#x5224;&#x65AD;&#x5728;methods&#x4E2D;&#x5B9A;&#x4E49;&#x7684;&#x65B9;&#x6CD5;&#x540D;&#x662F;&#x5426;props&#x5B9A;&#x4E49;&#x7684;&#x65B9;&#x6CD5;&#x540D;&#x91CD;&#x540D;</span>
+  <span class="token keyword">const</span> props <span class="token operator">=</span> vm<span class="token punctuation">.</span>$options<span class="token punctuation">.</span>props
+  <span class="token comment">// &#x904D;&#x5386;methods&#x5BF9;&#x8C61;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> key <span class="token keyword">in</span> methods<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// &#x975E;&#x751F;&#x4EA7;&#x73AF;&#x5883;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">!==</span> <span class="token string">&apos;production&apos;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// &#x5982;&#x679C;methods&#x5BF9;&#x8C61;&#x4E2D;&#x7684;key&#x5BF9;&#x5E94;&#x7684;value&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x4E0D;&#x662F;function,&#x7ED9;&#x51FA;&#x8B66;&#x544A;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> methods<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">!==</span> <span class="token string">&apos;function&apos;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">warn</span><span class="token punctuation">(</span>
+          <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Method &quot;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>key<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&quot; has type &quot;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">typeof</span> methods<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&quot; in the component definition. </span><span class="token template-punctuation string">`</span></span> <span class="token operator">+</span>
+          <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Did you reference the function correctly?</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+          vm
+        <span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+      <span class="token comment">// &#x5982;&#x679C;&#x5B9A;&#x4E49;&#x4E86;props&#xFF0C;&#x5E76;&#x4E14;methods&#x603B;&#x4E2D;&#x7684;key&#x5B58;&#x5728;&#x4E8E;props&#xFF0C;&#x7ED9;&#x51FA;&#x8B66;&#x544A;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>props <span class="token operator">&amp;&amp;</span> <span class="token function">hasOwn</span><span class="token punctuation">(</span>props<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">warn</span><span class="token punctuation">(</span>
+          <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Method &quot;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>key<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&quot; has already been defined as a prop.</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+          vm
+        <span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+      <span class="token comment">// &#x5982;&#x679C;methods&#x4E2D;&#x5B9A;&#x4E49;&#x6CD5;&#x65B9;&#x6CD5;&#x5B58;&#x5728;&#x4E8E;vm&#x5B9E;&#x4F8B;&#xFF0C;&#x5E76;&#x4E14;&#x65B9;&#x6CD5;&#x662F;&#x4EE5;$&#x6216;&#x8005;&#x662F;_&#x547D;&#x540D;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>key <span class="token keyword">in</span> vm<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">isReserved</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">warn</span><span class="token punctuation">(</span>
+          <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Method &quot;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>key<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&quot; conflicts with an existing Vue instance method. </span><span class="token template-punctuation string">`</span></span> <span class="token operator">+</span>
+          <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Avoid defining component methods that start with _ or $.</span><span class="token template-punctuation string">`</span></span>
+        <span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// &#x5982;&#x679C;methods&#x4E2D;&#x5B9A;&#x4E49;&#x7684;&#x65B9;&#x5F0F;&#x4E0D;&#x662F;function&#x7C7B;&#x578B;&#xFF0C;&#x8FD4;&#x56DE;&#x7A7A;&#x51FD;&#x6570;noop</span>
+    vm<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">typeof</span> methods<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">!==</span> <span class="token string">&apos;function&apos;</span> <span class="token operator">?</span> noop <span class="token punctuation">:</span> <span class="token function">bind</span><span class="token punctuation">(</span>methods<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">,</span> vm<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>example&#xFF1A;</p>
+<pre class="language-"><code class="lang-javascript"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">&quot;app&quot;</span><span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">&gt;</span>
+
+<span class="token operator">&lt;</span>script<span class="token operator">&gt;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  name<span class="token punctuation">:</span> <span class="token string">&apos;App&apos;</span><span class="token punctuation">,</span>
+  <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  methods<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token function">handleClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function">handleView</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+</code></pre>
+<p>&#x7ED3;&#x679C;&#x5982;&#x4E0B;&#x56FE;&#xFF1A;</p>
+<p><img src="images/initMethods.jpg"></p>
+
                                 
                                 </section>
                             
@@ -504,7 +581,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"initMethods","level":"1.3.5.2","depth":3,"next":{"title":"initData","level":"1.3.5.3","depth":3,"path":"docs/week02/initState/initData.md","ref":"./docs/week02/initState/initData.md","articles":[]},"previous":{"title":"initProps","level":"1.3.5.1","depth":3,"path":"docs/week02/initState/initProps.md","ref":"./docs/week02/initState/initProps.md","articles":[]},"dir":"neutral"},"config":{"plugins":["prism","-highlight","back-to-top-button","github","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"github":{"url":"https://github.com/luguanrui"},"livereload":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"luguanrui","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Vue2.0源码阅读","language":"zh-hans","gitbook":"3.2.3","description":"记录自己学习Vue2.0源码的过程"},"file":{"path":"docs/week02/initState/initMethods.md","mtime":"2019-08-02T03:14:17.394Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-05T03:14:09.812Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"initMethods","level":"1.3.5.2","depth":3,"next":{"title":"initData","level":"1.3.5.3","depth":3,"path":"docs/week02/initState/initData.md","ref":"./docs/week02/initState/initData.md","articles":[]},"previous":{"title":"initProps","level":"1.3.5.1","depth":3,"path":"docs/week02/initState/initProps.md","ref":"./docs/week02/initState/initProps.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","back-to-top-button","github","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"github":{"url":"https://github.com/luguanrui"},"livereload":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"luguanrui","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Vue2.0源码阅读","language":"zh-hans","gitbook":"3.2.3","description":"记录自己学习Vue2.0源码的过程"},"file":{"path":"docs/week02/initState/initMethods.md","mtime":"2019-08-05T11:10:30.271Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-05T07:46:31.648Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

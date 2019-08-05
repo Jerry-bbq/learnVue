@@ -146,3 +146,5 @@ export default {
 ```
 
 <img src="./images/initProps.jpg"/>
+
+<img src="./images/defineProps.jpg">
