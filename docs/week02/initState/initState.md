@@ -1,12 +1,12 @@
 # initState
 
-初始化state，包括：
+`initState`包括如下`5`个方法的初始化（有顺序）：
 
-- props
-- methods
-- data
-- computed
-- watch
+1. props
+2. methods
+3. data
+4. computed
+5. watch
 
 源码分析：
 
