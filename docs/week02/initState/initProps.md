@@ -2,7 +2,7 @@
 
 分析：
 
-* 获取`vm.$options.propsData`
+* 获取父组件传递过来的`propsData`：`vm.$options.propsData`
 * 遍历自定义属性`propsOptions`
     * 校验`vm.$options.propsData`中是否存在自定义的`props`
     * 非生产环境下，校验自定义的`props`是否为保留属性(`key,ref,slot,slot-scope,is`)
