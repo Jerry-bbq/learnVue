@@ -1,6 +1,6 @@
 # initState
 
-`initState`包括如下`5`个方法的初始化（有顺序）：
+`initState`包括如下`5`个state的初始化（有顺序），都是对象的形式(其中data可以是函数可以是对象，但是如果是[组件的定义只接受函数](https://cn.vuejs.org/v2/api/#data))
 
 1. props
 2. methods
@@ -88,6 +88,8 @@ export default {
 
 ```
 
-结果如下图：
+`vm`实例的`$options`上的`5`个state，如下图：
 
 <img src="./images/initState.jpg">
+
+接下来，我们详细的看一下这个五个属性的初始化方法
