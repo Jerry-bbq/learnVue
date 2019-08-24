@@ -1,5 +1,7 @@
 # 引入Vue的时候，vue内部做了什么
 
+执行如下代码：
+
 ```javascript
 import Vue from 'vue'
 // 打印出引入的Vue
@@ -149,3 +151,5 @@ export function initGlobalAPI (Vue: GlobalAPI) {
 为什么我们能够使用全局的api ?就是因为initGlobalAPI(Vue)这个函数，给Vue构造函数添加了这些全局的静态属性和方法
 
 <img src="./images/global-api.png" width="20%"/>
+
+从上面的过程我们知道了，在项目中`import Vue from vue`时,除了给Vue的`prototype`添加不同的属性和方法，也给Vue添加了不同的属性和方法。下面我们在看看我们在`new Vue()`的时候做了什么[下一章](./new.md)

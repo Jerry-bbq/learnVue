@@ -1,5 +1,7 @@
 # new Vue()的时候发生了什么
 
+从上一章我们知道，`import Vue from 'vue'`时，主要是给Vue的prototype和Vue添加不同的属性和方法，那么在实例化Vue时，在Vue内部又做了什呢？
+
 从源码分析，`new Vue()`实际上就是调用了原型上的`_init()`方法，那么`_init()`方法做了什么？
 
 执行如下代码，打印vue实例
@@ -90,9 +92,9 @@ export function initMixin (Vue: Class<Component>) {
 ```
 
 可以看出，`_init()`函数主要做了如下几件事：
-配置合并
 
 ```javascript
+配置合并
 vm._self = vm
 initLifecycle(vm)// 初始化生命周期
 initEvents(vm)// 初始化事件
